@@ -1,0 +1,37 @@
+CREATE SCHEMA chatto_db;
+
+USE chatto_db;
+
+CREATE TABLE users (
+	id BIGINT PRIMARY KEY  AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE chats (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    is_group BOOLEAN NOT NULL DEFAULT false,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE chat_members (
+	chat_id BIGINT,
+    user_id BIGINT,
+    joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (chat_id, user_id),
+    FOREIGN KEY (chat_id) REFERENCES chats(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE messages (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    sender_id BIGINT NOT NULL,
+	chat_id BIGINT NOT NULL,
+	FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (chat_id) REFERENCES chats(id) ON DELETE CASCADE
+);
