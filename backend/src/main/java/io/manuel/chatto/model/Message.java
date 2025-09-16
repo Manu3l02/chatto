@@ -11,7 +11,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "messages")
 public class Message {
@@ -34,6 +42,12 @@ public class Message {
 	@JoinColumn(name = "chat_id", nullable = false)
 	private Chat chat;
 	
+	public Message(String content, User sender, Chat chat) {
+		this.content = content;
+		this.sender = sender;
+		this.chat = chat;
+	}
+
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = LocalDateTime.now();
