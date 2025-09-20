@@ -49,11 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				
 				if (user != null) {
 					UsernamePasswordAuthenticationToken authToken = 
-							new UsernamePasswordAuthenticationToken(
-									user, // Principal 
-									null, // Credential
-									null  // Authorities (for the future when i got role)
-							);
+							new UsernamePasswordAuthenticationToken(email, null, null);
 					
 					authToken.setDetails(
 						new WebAuthenticationDetailsSource().buildDetails(request)
