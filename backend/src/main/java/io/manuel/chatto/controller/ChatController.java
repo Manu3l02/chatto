@@ -1,5 +1,7 @@
 package io.manuel.chatto.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.manuel.chatto.dto.ChatRequest;
+import io.manuel.chatto.dto.ChatResponse;
 import io.manuel.chatto.model.Chat;
 import io.manuel.chatto.service.ChatService;
 import jakarta.validation.Valid;
@@ -22,9 +25,9 @@ public class ChatController {
 		this.chatService = chatService;
 	}
 
-	@GetMapping("/test")
-	public ResponseEntity<String> testProtected() {
-		return ResponseEntity.ok("Accesso riuscito! JWT valido.");
+	@GetMapping
+	public List<ChatResponse> getUserChats() {
+		return chatService.getChatsForCurrentUser();
 	}
 	
 	@PostMapping("/chat")

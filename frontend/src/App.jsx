@@ -2,24 +2,41 @@ import { useEffect, useState } from "react";
 import { connect, sendMessage } from "./ws";
 import { useAuth } from "./context/AuthContext";
 import Login from "./pages/Login";
+import { fetchChats } from "./api/chatApi";
 
 function App() {
   const { token, user, logout } = useAuth();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const chatId = 1;
+  const [chats, setChats] = useState([]);
+  const [currentChatId, setCurrentChatId] = useState(null);
 
   useEffect(() => {
-    if (token) {
-      connect(token, chatId, (msg) => {
+    if (token && currentChatId) {
+      connect(token, currentChatId, (msg) => {
         setMessages((prev) => [...prev, msg]);
       });
     }
-  }, [token, chatId]);
+  }, [token, currentChatId]);
+
+  useEffect(() => {
+    if (!token) return;
+    (async () => {
+      try {
+        const data = await fetchChats(() => ({ Authorization: `Bearer ${token}`}));
+        setChats(data);
+        if (data.length > 0) {
+          setCurrentChatId(data[0].id);
+        }
+      } catch (err) {
+        console.error("Error fetch chats", err);
+      }
+    })();
+  }, [token]);
 
   const handleSend = () => {
     if (!input.trim()) return;
-    sendMessage(chatId, input);
+    sendMessage(currentChatId, input);
     setInput("");
   };
 
@@ -40,16 +57,28 @@ function App() {
           Logout
         </button>
         <ul className="mt-4">
-          <li className="p-2 rounded hover:bg-gray-200 cursor-pointer">
-            Chat 1
-          </li>
+          {chats.map((c) => (
+            <li
+              key={c.id}
+              className={`p-2 rounded cursor-pointer 
+                ${ currentChatId === c.id ? "bg-blue-100" : "hover:bg-gray-200"}`}
+              onClick={() => {
+                setCurrentChatId(c.id)
+                setMessages([])
+              }}
+            > 
+              {c.name || "No name"}
+            </li>
+          ))}
         </ul>
       </aside>
 
       {/* Main Chat Window */}
       <main className="flex-1 flex flex-col">
         <header className="p-4 border-b bg-white">
-          <h2 className="text-lg font-semibold">Chat {chatId}</h2>
+          <h2 className="text-lg font-semibold">
+            {chats.find(c => c.id === currentChatId)?.name || "No chat"}
+          </h2>
         </header>
 
         {/* Messages */}
