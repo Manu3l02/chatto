@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { connect, sendMessage } from "./ws";
+import { useAuth } from "./context/AuthContext";
+import Login from "./pages/Login";
 
 function App() {
+  const { token, user, logout } = useAuth();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [token, setToken] = useState(""); // JWT da inserire
-  const chatId = 1; // per ora fisso
+  const chatId = 1;
 
   useEffect(() => {
     if (token) {
@@ -21,21 +23,23 @@ function App() {
     setInput("");
   };
 
+  if (!token || !user) {
+    return <Login />;
+  }
+
   return (
     <div className="h-screen flex bg-gray-100">
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r p-4">
         <h2 className="text-xl font-bold mb-4">Chatto 💬</h2>
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="JWT Token"
-            value={token}
-            onChange={(e) => setToken(e.target.value)}
-            className="w-full border rounded p-2 text-sm"
-          />
-        </div>
-        <ul>
+        <p className="mb-2 text-sm">Connected as <b>{user?.username}</b></p>
+        <button 
+          onClick={logout}
+          className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600"
+        >
+          Logout
+        </button>
+        <ul className="mt-4">
           <li className="p-2 rounded hover:bg-gray-200 cursor-pointer">
             Chat 1
           </li>
@@ -87,7 +91,7 @@ function App() {
             onClick={handleSend}
             className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
           >
-            Invia
+            Send
           </button>
         </footer>
       </main>
