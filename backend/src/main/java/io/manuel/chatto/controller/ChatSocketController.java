@@ -32,7 +32,7 @@ public class ChatSocketController {
 		MessageResponse saved = 
 				messageService.sendMessage(request.chatId(), email, request.content());
 		
-		messagingTemplate.convertAndSend("/topic/chats" + saved.chatId(), saved);
+		messagingTemplate.convertAndSend("/topic/chats/" + saved.chatId(), saved);
 	}
 	
 }

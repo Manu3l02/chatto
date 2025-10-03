@@ -15,7 +15,7 @@ export function connect(token, chatId, onMessage) {
     debug: (str) => console.log("STOMP:", str),
     onConnect: () => {
       console.log("✅ Connected to WebSocket");
-      stompClient.subscribe(`/topic/chats${chatId}`, (msg) => {
+      stompClient.subscribe(`/topic/chats/${chatId}`, (msg) => {
         onMessage(JSON.parse(msg.body));
       });
     },

@@ -3,6 +3,7 @@ import { connect, sendMessage } from "./ws";
 import { useAuth } from "./context/AuthContext";
 import Login from "./pages/Login";
 import { fetchChats } from "./api/chatApi";
+import { fetchMessages } from "./api/messageApi";
 
 function App() {
   const { token, user, logout } = useAuth();
@@ -33,6 +34,19 @@ function App() {
       }
     })();
   }, [token]);
+
+  useEffect(() => {
+    if (!token || !currentChatId) return;
+
+    (async () => {
+      try {
+        const data = await fetchMessages(currentChatId, () => ({ Authorization: `Bearer ${token}`}));
+        setMessages(data.content || []);
+      } catch (err) {
+        console.error("Error fetching messages", err);
+      }
+    })();
+  }, [token, currentChatId]);
 
   const handleSend = () => {
     if (!input.trim()) return;
