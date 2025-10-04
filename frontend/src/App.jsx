@@ -24,7 +24,7 @@ function App() {
     if (!token) return;
     (async () => {
       try {
-        const data = await fetchChats(() => ({ Authorization: `Bearer ${token}`}));
+        const data = await fetchChats(token);
         setChats(data);
         if (data.length > 0) {
           setCurrentChatId(data[0].id);
@@ -40,7 +40,7 @@ function App() {
 
     (async () => {
       try {
-        const data = await fetchMessages(currentChatId, () => ({ Authorization: `Bearer ${token}`}));
+        const data = await fetchMessages(currentChatId, token);
         setMessages(data.content || []);
       } catch (err) {
         console.error("Error fetching messages", err);
