@@ -1,5 +1,14 @@
 # 📌 Chatto 💬
 
+[![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=plastic&logo=openjdk&logoColor=white)](#)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=plastic&logo=springboot&logoColor=fff)](#)
+[![React](https://img.shields.io/badge/React-%2320232a.svg?style=plastic&logo=react&logoColor=%2361DAFB)](#)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=plastic&logo=vite&logoColor=fff)](#)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?style=plastic&logo=tailwind-css&logoColor=white)](#)
+[![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=plastic&logo=mysql&logoColor=fff)](#)
+[![Git](https://img.shields.io/badge/GitHub-181717?style=plastic&logo=github&logoColor=white)](#)
+[![Maven](https://img.shields.io/badge/Maven-C71A36?style=plastic&logo=apache-maven&logoColor=white)](#)
+
 Un'applicazione di chat **full-stack** sviluppata con **Spring Boot** (backend) e **React + Vite + TailwindCSS** (frontend).  
 Supporta autenticazione JWT, WebSocket con STOMP per messaggistica in tempo reale e persistenza dei messaggi.
 
