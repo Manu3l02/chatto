@@ -7,6 +7,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?style=plastic&logo=tailwind-css&logoColor=white)](#)
 [![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=plastic&logo=mysql&logoColor=fff)](#)
 [![Git](https://img.shields.io/badge/GitHub-181717?style=plastic&logo=github&logoColor=white)](#)
+[![Maven](https://img.shields.io/badge/Maven-C71A36?style=plastic&logo=apache-maven&logoColor=white)](#)
 
 
 A **full-stack chat application** built with **Spring Boot** (backend) and **React + Vite + TailwindCSS** (frontend).  
