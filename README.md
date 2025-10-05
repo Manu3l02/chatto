@@ -1,5 +1,14 @@
 # 📌 Chatto 💬
 
+[![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=plastic&logo=openjdk&logoColor=white)](#)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=plastic&logo=springboot&logoColor=fff)](#)
+[![React](https://img.shields.io/badge/React-%2320232a.svg?style=plastic&logo=react&logoColor=%2361DAFB)](#)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=plastic&logo=vite&logoColor=fff)](#)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?style=plastic&logo=tailwind-css&logoColor=white)](#)
+[![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=plastic&logo=mysql&logoColor=fff)](#)
+[![Git](https://img.shields.io/badge/GitHub-181717?style=plastic&logo=github&logoColor=white)](#)
+
+
 A **full-stack chat application** built with **Spring Boot** (backend) and **React + Vite + TailwindCSS** (frontend).  
 Supports JWT authentication, WebSocket with STOMP for real-time messaging, and message persistence.
 
@@ -33,7 +42,7 @@ Supports JWT authentication, WebSocket with STOMP for real-time messaging, and m
 ## 🛠️ Tech Stack
 
 ### Backend
-- Java 17
+- Java 21
 - Spring Boot (Web, Security, JPA, WebSocket)
 - JWT Authentication
 - Maven
