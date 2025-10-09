@@ -40,3 +40,6 @@ dist/
 
 ### Configuration File
 /backend/src/main/resources/application.properties
+
+### Frontend
+.vite/
